@@ -8,6 +8,7 @@ import TopNav from '../../components/TopNav';
 import Settings from '../../pages/Settings';
 import Workout from '../../pages/Workout';
 import Login from '../../pages/Login';
+import History from '../../pages/History';
 
 const mapStateToProps = (state) => {
 	return {
@@ -15,7 +16,10 @@ const mapStateToProps = (state) => {
 		exercises: state.exercises,
 		sets: state.sets,
 		muscles: state.muscles,
-		user: state.user
+		user: state.user,
+		workout: state.workout,
+		set: state.set,
+		workouts: state.workouts
 	};
 }
 
@@ -53,6 +57,9 @@ const App = (props) => {
 					</Route>
 					<Route path="/workout">
 						<Workout setTitle={setTitle} {...props} />
+					</Route>
+					<Route path="/history">
+						<History setTitle={setTitle} {...props} />
 					</Route>
 					<Route path="/login">
 						<Login setTitle={setTitle} {...props} />

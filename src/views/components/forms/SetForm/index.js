@@ -32,6 +32,12 @@ const SetForm = (props) => {
 		setMuscle(props.initialMuscle);
 	}, [props.initialValues]);
 
+	React.useEffect(() => {
+		if (props.suggestions) {
+			setSuggestions({reps: props.suggestions.reps, weight: props.suggestions.weight});
+		}
+	}, [props.suggestions.reps, props.suggestions.weight]);
+
 	const handleChange = (e) => {
 		e.persist();
 		setValues((prevValues) => ({...prevValues, [e.target.name]: e.target.value}));
@@ -130,7 +136,7 @@ const SetForm = (props) => {
 					onChange={(e) => {
 						handleChange(e);
 						if (props.showSuggestLast && e.target.value) {
-							setSuggestions(props.suggestLast(e.target.value));
+							props.getSuggestions(e.target.value);
 						}
 					}}
 					className="form-control col-4"

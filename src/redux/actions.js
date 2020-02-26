@@ -216,7 +216,8 @@ export function createSet(data) {
 	}
 }
 
-export function getSets() {
+export function getSets(workout_id = null) {
+	const data = workout_id ? { workout_id } : {};
 	return {
 		types: [
 			types.GET_SETS_REQUEST,
@@ -225,7 +226,8 @@ export function getSets() {
 		],
 		promise: () => {
 			return ajax({
-				url: api + '/sets'
+				url: api + '/sets',
+				data
 			})
 		}
 	}
@@ -323,5 +325,71 @@ export function checkUser() {
 				url: api + '/auth'
 			})
 		}
+	}
+}
+
+export function startNewWorkout() {
+	return {
+		types: [
+			types.START_WORKOUT_REQUEST,
+			types.START_WORKOUT_SUCCESS,
+			types.START_WORKOUT_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/workouts/new'
+			})
+		}
+	}
+}
+
+export function continueWorkout() {
+	return {
+		types: [
+			types.CONTINUE_WORKOUT_REQUEST,
+			types.CONTINUE_WORKOUT_SUCCESS,
+			types.CONTINUE_WORKOUT_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/workouts/continue'
+			})
+		}
+	}
+}
+
+export function getWorkout(id) {
+	return {
+		types: [
+			types.GET_WORKOUT_REQUEST,
+			types.GET_WORKOUT_SUCCESS,
+			types.GET_WORKOUT_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/workouts/' + id
+			})
+		}
+	}
+}
+
+export function getWorkouts() {
+	return {
+		types: [
+			types.GET_WORKOUTS_REQUEST,
+			types.GET_WORKOUTS_SUCCESS,
+			types.GET_WORKOUTS_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/workouts'
+			})
+		}
+	}
+}
+
+export function clearSet() {
+	return {
+		type: types.CLEAR_SET,
 	}
 }

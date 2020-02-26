@@ -102,7 +102,7 @@ const SideNav = (props) => {
 			</ListItem>
 			<ListItem 
 				button
-				onClick={props.changePage('/workout')}
+				onClick={props.changePage('/history')}
 			>
 				<ListItemIcon><TrendingUp /></ListItemIcon>
 				<ListItemText primary="History" />

@@ -82,9 +82,31 @@ function sets(state = [], action) {
 	}
 }
 
-function set(state = [], action) {
+function set(state = {}, action) {
 	switch(action.type) {
 		case types.GET_SET_SUCCESS:
+			return action.payload;
+		case types.CLEAR_SET:
+			return {};
+		default:
+			return state;
+	}
+}
+
+function workout(state = {}, action) {
+	switch(action.type) {
+		case types.START_WORKOUT_SUCCESS:
+		case types.CONTINUE_WORKOUT_SUCCESS:
+		case types.GET_WORKOUT_SUCCESS:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
+function workouts(state = [], action) {
+	switch(action.type) {
+		case types.GET_WORKOUTS_SUCCESS:
 			return action.payload;
 		default:
 			return state;
@@ -95,6 +117,9 @@ export default {
 	muscle_groups,
 	exercises,
 	sets,
+	set,
 	muscles,
-	user
+	user,
+	workout,
+	workouts
 }
