@@ -1,7 +1,7 @@
 import ajax from "../utils/ajax"
 import types from './types';
 
-const api = '/gym-app/api';
+const api = '/api';
 
 export function getMuscleGroups() {
 	return {
@@ -199,6 +199,27 @@ export function deleteExercise(id) {
 	}
 }
 
+export function getSuggestions(id) {
+	return {
+		types: [
+			types.GET_SUGGESTION_REQUEST,
+			types.GET_SUGGESTION_SUCCESS,
+			types.GET_SUGGESTION_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/exercises/' + id + '/sets/last'
+			});
+		}
+	}
+}
+
+export function clearSuggestions() {
+	return {
+		type: types.CLEAR_SUGGESTIONS
+	}
+}
+
 export function createSet(data) {
 	return {
 		types: [
@@ -345,16 +366,7 @@ export function startNewWorkout() {
 
 export function continueWorkout() {
 	return {
-		types: [
-			types.CONTINUE_WORKOUT_REQUEST,
-			types.CONTINUE_WORKOUT_SUCCESS,
-			types.CONTINUE_WORKOUT_FAILURE,
-		],
-		promise: () => {
-			return ajax({
-				url: api + '/workouts/continue'
-			})
-		}
+		type: types.CONTINUE_WORKOUT
 	}
 }
 
@@ -368,6 +380,21 @@ export function getWorkout(id) {
 		promise: () => {
 			return ajax({
 				url: api + '/workouts/' + id
+			})
+		}
+	}
+}
+
+export function checkCurrentWorkout() {
+	return {
+		types: [
+			types.GET_CURRENT_WORKOUT_REQUEST,
+			types.GET_CURRENT_WORKOUT_SUCCESS,
+			types.GET_CURRENT_WORKOUT_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/workouts/current'
 			})
 		}
 	}

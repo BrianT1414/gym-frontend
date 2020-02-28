@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import ManageTable from '../../../components/ManageTable';
 import ExerciseForm from '../../../components/forms/ExerciseForm';
+import BreadCrumb from '../../../components/BreadCrumb';
 
 const ManageExercises = (props) => {
 	const [edit_id, setEdit] = React.useState(0);
@@ -43,6 +43,7 @@ const ManageExercises = (props) => {
 
 	return (
 		<>
+			<BreadCrumb />
 			<Route exact path="/settings/exercises">	
 				<div className="row" style={{ marginTop: 10 }}>
 					<div className="col-6 col-form-label" style={{ textAlign: 'right' }}>

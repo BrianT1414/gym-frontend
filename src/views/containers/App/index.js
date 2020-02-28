@@ -1,36 +1,39 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
 import * as actions from '../../../redux/actions';
-import TopNav from '../../components/TopNav';
-import Settings from '../../pages/Settings';
-import Workout from '../../pages/Workout';
-import Login from '../../pages/Login';
-import History from '../../pages/History';
+import { connectMeta } from '../../../../../../redux-meta/src';
+import Router from '../../pages';
 
 const mapStateToProps = (state) => {
 	return {
+		user: state.user,
 		muscle_groups: state.muscle_groups,
+		muscles: state.muscles,
 		exercises: state.exercises,
 		sets: state.sets,
-		muscles: state.muscles,
-		user: state.user,
-		workout: state.workout,
 		set: state.set,
+		workout: state.workout,
 		workouts: state.workouts
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		...actions
+		getMuscleGroups: actions.getMuscleGroups,
+		getMuscles: actions.getMuscles,
+		getExercises: actions.getExercises,
+		getSets: actions.getSets,
+		getSet: actions.getSet,
+		login: actions.login,
+		logout: actions.logout,
+		checkUser: actions.checkUser,
 	}, dispatch);
 }
 
 const App = (props) => {
-	const [title, setTitle] = React.useState('Workout App');
+	const checkUserMeta = props.getMeta(actions.checkUser)
 
 	let history = useHistory();
 
@@ -39,35 +42,31 @@ const App = (props) => {
 	}, []);
 
 	React.useEffect(() => {
-		if (Object.keys(props.user).length === 0) {
+		if (Object.keys(props.user).length === 0 && checkUserMeta.success === true) {
 			history.push('/login');
 		}
-	}, [props.user]);
+	}, [props.user, checkUserMeta]);
 
 	return (
-		<>
-			<TopNav title={title} {...props} />
-			<div style={{ margin: 5 }}>
-				<Switch>
-					<Route exact path="/">
-						<Workout setTitle={setTitle} {...props} />
-					</Route>
-					<Route path="/settings">
-						<Settings setTitle={setTitle} {...props} />
-					</Route>
-					<Route path="/workout">
-						<Workout setTitle={setTitle} {...props} />
-					</Route>
-					<Route path="/history">
-						<History setTitle={setTitle} {...props} />
-					</Route>
-					<Route path="/login">
-						<Login setTitle={setTitle} {...props} />
-					</Route>
-				</Switch>
-			</div>
-		</>
+		<Router 
+			user={props.user}
+			muscle_groups={props.muscle_groups}
+			muscles={props.muscles}
+			exercises={props.exercises}
+			sets={props.sets}
+			set={props.set}
+			workout={props.workout}
+			workouts={props.workout}
+			getMuscleGroups={props.getMuscleGroups}
+			getMuscles={props.getMuscles}
+			getExercises={props.getExercises}
+			getSets={props.getSets}
+			getSet={props.getSet}
+			login={props.login}
+			logout={props.logout}
+			checkUser={props.checkUser}
+		/>
 	);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(connectMeta(App));

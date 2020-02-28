@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import ManageTable from '../../../components/ManageTable';
 import MuscleGroupForm from '../../../components/forms/MuscleGroupForm';
+import BreadCrumb from '../../../components/BreadCrumb';
 
 const ManageMuscleGroups = (props) => {
 	const [edit_id, setEdit] = React.useState(0);
@@ -41,6 +41,7 @@ const ManageMuscleGroups = (props) => {
 
 	return (
 		<>
+			<BreadCrumb />
 			<Route exact path="/settings/muscle-groups">
 				<ManageTable 
 					data={props.muscle_groups} 

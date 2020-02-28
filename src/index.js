@@ -9,7 +9,7 @@ const AppWrapper = () => {
 	const store = createStore();
 
 	return (
-		<BrowserRouter basename="gym-app">
+		<BrowserRouter>
 			<Provider store={store}>
 				<App/>
 			</Provider>

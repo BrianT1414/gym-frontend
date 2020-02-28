@@ -10,19 +10,19 @@ const ChooseWorkout = (props) => {
 		<>
 			<Button 
 				variant="outlined"
+				onClick={props.continueWorkout}
+				fullWidth={true}
+				style={{ marginTop: 15 }}
+			>
+				Continue Today's Workout
+			</Button>
+			<Button 
+				variant="outlined"
 				onClick={props.startNewWorkout}
 				fullWidth={true}
 				style={{ marginTop: 15 }}
 			>
 				Start New Workout
-			</Button>
-			<Button 
-				variant="outlined"
-				onClick={props.continueWorkout}
-				fullWidth={true}
-				style={{ marginTop: 15 }}
-			>
-				Continue Previous Workout
 			</Button>
 		</>
 	);

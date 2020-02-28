@@ -1,9 +1,4 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import Button from '@material-ui/core/Button';
 import LeftArrow from '@material-ui/icons/ChevronLeft';
 import RightArrow from '@material-ui/icons/ChevronRight';
 import Plus from '@material-ui/icons/Add';
@@ -12,12 +7,15 @@ const SetForm = (props) => {
 	const [muscle_group_id, setMuscleGroup] = React.useState(() => props.initialGroup ? props.initialGroup : '');
 	const [muscle_id, setMuscle] = React.useState(props.initialMuscle ? props.initialMuscle : '');
 	const [values, setValues] = React.useState(props.initialValues);
-	const [suggestions, setSuggestions] = React.useState({reps: null, weight: null});
 
 	React.useEffect(() => {
 		props.getMuscleGroups();
 		props.getMuscles();
 		props.getExercises();
+
+		return () => {
+			props.clearSuggestions();
+		}
 	}, []);
 
 	React.useEffect(() => {
@@ -31,12 +29,6 @@ const SetForm = (props) => {
 		setMuscleGroup(props.initialGroup);
 		setMuscle(props.initialMuscle);
 	}, [props.initialValues]);
-
-	React.useEffect(() => {
-		if (props.suggestions) {
-			setSuggestions({reps: props.suggestions.reps, weight: props.suggestions.weight});
-		}
-	}, [props.suggestions.reps, props.suggestions.weight]);
 
 	const handleChange = (e) => {
 		e.persist();
@@ -52,7 +44,7 @@ const SetForm = (props) => {
 	}
 
 	const repAlreadyListed = () => {
-		return suggestions.reps == 5 || suggestions.reps == 10 || suggestions.reps == 12;
+		return props.suggestions.reps == 5 || props.suggestions.reps == 10 || props.suggestions.reps == 12;
 	}
 
 	const reset = (e) => {
@@ -60,7 +52,7 @@ const SetForm = (props) => {
 		setValues(props.initialValues);
 		setMuscleGroup(props.initialGroup ? props.initialGroup : '');
 		setMuscle(props.initialMuscle ? props.initialMuscle : '');
-		setSuggestions({reps: null, weight: null});
+		props.clearSuggestions();
 	}
 
 	const submit = (e) => {
@@ -70,7 +62,7 @@ const SetForm = (props) => {
 			setValues(props.initialValues);
 			setMuscleGroup(props.initialGroup ? props.initialGroup : '');
 			setMuscle(props.initialMuscle ? props.initialMuscle : '');
-			setSuggestions({reps: null, weight: null});
+			props.clearSuggestions();
 		}
 	}
 
@@ -170,20 +162,20 @@ const SetForm = (props) => {
 					onChange={handleChange}
 				/>
 				<div className="col-6">
-					{props.showSuggestLast && suggestions.reps && !repAlreadyListed() ?
+					{props.showSuggestLast && props.suggestions.reps && !repAlreadyListed() ?
 						<button 
 							type="button" 
-							onClick={() => quickSetReps(suggestions.reps)()} 
+							onClick={() => quickSetReps(props.suggestions.reps)()} 
 							className="btn btn-primary" 
 							style={{ marginRight: 2 }}
 						>
-							{suggestions.reps}
+							{props.suggestions.reps}
 						</button>
 					: null}
 					<button 
 						type="button" 
 						onClick={quickSetReps(5)} 
-						className={suggestions.reps == 5 ? "btn btn-primary" : "btn btn-secondary"}
+						className={props.suggestions.reps == 5 ? "btn btn-primary" : "btn btn-secondary"}
 						style={{ marginRight: 2 }}
 					>
 						5
@@ -191,7 +183,7 @@ const SetForm = (props) => {
 					<button 
 						type="button" 
 						onClick={quickSetReps(10)} 
-						className={suggestions.reps == 10 ? "btn btn-primary" : "btn btn-secondary"}
+						className={props.suggestions.reps == 10 ? "btn btn-primary" : "btn btn-secondary"}
 						style={{ marginRight: 2 }}
 					>
 						10
@@ -199,7 +191,7 @@ const SetForm = (props) => {
 					<button 
 						type="button" 
 						onClick={quickSetReps(12)} 
-						className={suggestions.reps == 12 ? "btn btn-primary" : "btn btn-secondary"}
+						className={props.suggestions.reps == 12 ? "btn btn-primary" : "btn btn-secondary"}
 					>
 						12
 					</button>
@@ -217,14 +209,14 @@ const SetForm = (props) => {
 					onChange={handleChange}
 				/>
 				<div className="col-6">
-					{props.showSuggestLast && suggestions.weight ?
+					{props.showSuggestLast && props.suggestions.weight ?
 						<button 
 							type="button" 
-							onClick={() => quickSetWeight(suggestions.weight)} 
+							onClick={() => quickSetWeight(props.suggestions.weight)} 
 							className="btn btn-primary" 
 							style={{ marginRight: 2 }}
 						>
-							{suggestions.weight}
+							{props.suggestions.weight}
 						</button>
 					: null}
 				</div>

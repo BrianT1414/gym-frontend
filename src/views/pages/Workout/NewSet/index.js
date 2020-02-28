@@ -9,7 +9,6 @@ const emptyFormValues = {
 
 const NewSet = (props) => {
 	const [set, setSet] = React.useState(-1);
-	const [suggestions, setSuggestions] = React.useState({});
 
 	React.useEffect(() => {
 		props.setTitle('Workout');
@@ -19,15 +18,6 @@ const NewSet = (props) => {
 	React.useEffect(() => {
 		setSet(-1);
 	}, [props.sets.length]);
-
-	React.useEffect(() => {
-		if (props.set) {
-			setSuggestions({
-				reps: props.set.reps,
-				weight: props.set.weight
-			})
-		}
-	}, [props.set.reps, props.set.weight])
 
 	const goBack = () => {
 		if (set !== -1) {
@@ -63,34 +53,7 @@ const NewSet = (props) => {
 			props.getSets(props.workout.id);
 		}, 200);
 	}
-
-	const suggestLast = (exercise_id) => {
-		const newArray = [...props.sets];
-		newArray.reverse();
-		const lastSet = newArray.reduce((acc,cur) => {
-			if (acc) {return acc};
-			if (cur.exercise_id == exercise_id) {
-				return cur;
-			}
-		},null);
-		if (lastSet) {
-			return {
-				reps: lastSet.reps,
-				weight: lastSet.weight
-			}
-		} else {
-			return {
-				reps: null,
-				weight: null
-			}
-		}
-	}
-
-	const getSuggestions = (id) => {
-		//props.getExercise(id);
-	}
-
-
+	
 	return (
 		<>
 			<div style={set === -1 ? {} : { display: 'none' }}>
@@ -108,9 +71,9 @@ const NewSet = (props) => {
 					showForward={false}
 					showNew={false}
 					showSuggestLast={true}
-					suggestLast={suggestLast}
-					getSuggestions={getSuggestions}
-					suggestions={suggestions}
+					getSuggestions={props.getSuggestions}
+					suggestions={props.suggestions}
+					clearSuggestions={props.clearSuggestions}
 				/>
 			</div>
 			{set !== -1 ?

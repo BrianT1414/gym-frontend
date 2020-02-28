@@ -3,10 +3,20 @@ import NewSet from './NewSet';
 import ChooseWorkout from './ChooseWorkout';
 
 const Workout = (props) => {
-	if (props.workout.id) {
-		return (<NewSet {...props} />);
-	} else {
-		return (<ChooseWorkout {...props} />);
+	React.useEffect(() => {
+		props.checkCurrentWorkout();
+	}, []);
+
+	if (props.getCurrentWorkoutLoading) {
+		return null;
+	} else if (props.confirmContinueWorkout) {
+		return (
+			<ChooseWorkout {...props} />
+		);
+	} else if (props.workout.id) {
+		return (
+			<NewSet {...props} />
+		);
 	}
 }
 

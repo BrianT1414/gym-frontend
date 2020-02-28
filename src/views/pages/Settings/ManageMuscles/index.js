@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import ManageTable from '../../../components/ManageTable';
 import MuscleForm from '../../../components/forms/MuscleForm';
+import BreadCrumb from '../../../components/BreadCrumb';
 
 const ManageMuscles = (props) => {
 	const [edit_id, setEdit] = React.useState(0);
@@ -43,6 +44,7 @@ const ManageMuscles = (props) => {
 
 	return (
 		<>
+			<BreadCrumb />
 			<Route exact path="/settings/muscles">
 				<div className="row" style={{ marginTop: 10 }}>
 					<div className="col-6 col-form-label" style={{ textAlign: 'right' }}>

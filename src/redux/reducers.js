@@ -96,9 +96,22 @@ function set(state = {}, action) {
 function workout(state = {}, action) {
 	switch(action.type) {
 		case types.START_WORKOUT_SUCCESS:
-		case types.CONTINUE_WORKOUT_SUCCESS:
 		case types.GET_WORKOUT_SUCCESS:
+		case types.GET_CURRENT_WORKOUT_SUCCESS:
 			return action.payload;
+		default:
+			return state;
+	}
+}
+
+function confirmContinueWorkout(state = false, action) {
+	switch(action.type) {
+		case types.GET_CURRENT_WORKOUT_SUCCESS:
+			return true;
+		case types.START_WORKOUT_SUCCESS:
+		case types.CONTINUE_WORKOUT:
+		case types.GET_WORKOUT_SUCCESS:
+			return false;
 		default:
 			return state;
 	}
@@ -113,6 +126,17 @@ function workouts(state = [], action) {
 	}
 }
 
+function suggestions(state = {reps: null, weight: null}, action) {
+	switch(action.type) {
+		case types.GET_SUGGESTION_SUCCESS:
+			return action.payload;
+		case types.CLEAR_SUGGESTIONS:
+			return {reps: null, weight: null}
+		default:
+			return state;
+	}
+}
+
 export default {
 	muscle_groups,
 	exercises,
@@ -121,5 +145,7 @@ export default {
 	muscles,
 	user,
 	workout,
-	workouts
+	workouts,
+	confirmContinueWorkout,
+	suggestions
 }
