@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Workout from '../../pages/Workout';
 import * as actions from '../../../redux/actions';
-import { connectMeta } from '../../../../../../redux-meta/src';
+import { connectMeta } from '../../../../../redux-meta/src';
 
 const mapStateToProps = (state) => {
   return {

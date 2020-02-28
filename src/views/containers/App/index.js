@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
 import * as actions from '../../../redux/actions';
-import { connectMeta } from '../../../../../../redux-meta/src';
+import { connectMeta } from '../../../../../redux-meta/src';
 import Router from '../../pages';
 
 const mapStateToProps = (state) => {
