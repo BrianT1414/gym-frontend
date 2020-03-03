@@ -41,7 +41,6 @@ const NewSet = (props) => {
 
 	const saveNew = (values) => {
 		props.createSet(addWorkoutId(values));
-		props.clearSet();
 		setTimeout(() => {
 			props.getSets(props.workout.id);
 		}, 200);

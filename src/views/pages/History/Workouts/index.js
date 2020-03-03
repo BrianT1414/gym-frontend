@@ -17,8 +17,10 @@ const Workouts = (props) => {
 	const getDate = (row) => {
 		let d = new Date(Date.parse(row.created_at));
 
-		const month = '' + (d.getMonth() + 1);
-		const day = '' + d.getDate();
+		let month = '' + (d.getMonth() + 1);
+		month = month.length > 1 ? month : '0' + month;
+		let day = '' + d.getDate();
+		day = day.length > 1 ? day : '0' + day;
 		const year = d.getFullYear();
 
 		return [month, day, year].join('-');

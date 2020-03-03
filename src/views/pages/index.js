@@ -4,7 +4,7 @@ import TopNav from '../components/TopNav';
 import Settings from '../containers/Settings';
 import Workout from '../containers/Workout';
 import Login from './Login';
-import History from './History';
+import History from '../containers/History';
 
 const Router = (props) => {
   const [title, setTitle] = React.useState('Workout App');

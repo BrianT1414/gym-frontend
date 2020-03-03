@@ -8,14 +8,16 @@ const ChooseWorkout = (props) => {
 
 	return (
 		<>
-			<Button 
-				variant="outlined"
-				onClick={props.continueWorkout}
-				fullWidth={true}
-				style={{ marginTop: 15 }}
-			>
-				Continue Today's Workout
-			</Button>
+			{props.confirmContinueWorkout ?
+				<Button 
+					variant="outlined"
+					onClick={props.continueWorkout}
+					fullWidth={true}
+					style={{ marginTop: 15 }}
+				>
+					Continue Today's Workout
+				</Button>
+			: null}
 			<Button 
 				variant="outlined"
 				onClick={props.startNewWorkout}

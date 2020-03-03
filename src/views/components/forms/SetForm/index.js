@@ -14,7 +14,9 @@ const SetForm = (props) => {
 		props.getExercises();
 
 		return () => {
-			props.clearSuggestions();
+			if (props.clearSuggestions === 'function') {
+				props.clearSuggestions();
+			}
 		}
 	}, []);
 

@@ -6,13 +6,8 @@ const ViewWorkout = (props) => {
 	const [formatted, setFormatted] = React.useState([]);
 
 	React.useEffect(() => {
-		console.log('mount')
-	},[])
-
-	React.useEffect(() => {
 		if (props.workout.id) {
 			props.setTitle(getDate(props.workout));
-			console.log(props.workout);
 			formatByExercise();
 		}
 	}, [props.workout.id]);
@@ -20,8 +15,10 @@ const ViewWorkout = (props) => {
 	const getDate = (workout) => {
 		let d = new Date(Date.parse(workout.created_at));
 
-		const month = '' + (d.getMonth() + 1);
-		const day = '' + d.getDate();
+		let month = '' + (d.getMonth() + 1);
+		month = month.length > 1 ? month : '0' + month;
+		let day = '' + d.getDate();
+		day = day.length > 1 ? day : '0' + day;
 		const year = d.getFullYear();
 
 		return [month, day, year].join('-');
@@ -37,7 +34,6 @@ const ViewWorkout = (props) => {
 			delete newSet.exercise;
 
 			setTypes(prev => {
-				console.log(prev)
 				if (!prev.includes(newSet.muscle_group)) {
 					return [...prev, newSet.muscle_group]
 				}
