@@ -9,13 +9,13 @@ const Workout = (props) => {
 
 	if (props.getCurrentWorkoutLoading) {
 		return null;
-	} else if (props.confirmContinueWorkout) {
-		return (
-			<ChooseWorkout {...props} />
-		);
-	} else if (props.workout.id) {
+	} else if (props.workout.id && !props.confirmContinueWorkout) {
 		return (
 			<NewSet {...props} />
+		);
+	} else {
+		return (
+			<ChooseWorkout {...props} />
 		);
 	}
 }
