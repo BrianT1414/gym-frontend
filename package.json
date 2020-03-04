@@ -27,12 +27,14 @@
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
+    "redux-meta": "https://github.com/BrianT1414/redux-meta.git",
     "redux-thunk": "^2.3.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/plugin-syntax-export-default-from": "^7.7.4"
   }
 }

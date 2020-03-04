@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../redux/actions';
-import { connectMeta } from '../../../../../redux-meta/src';
+import { connectMeta } from 'redux-meta';
 import History from '../../pages/History';
 
 const mapStateToProps = (state) => {
