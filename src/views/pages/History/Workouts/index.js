@@ -1,13 +1,14 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import AscIcon from '@material-ui/icons/ArrowDropUp';
+import DescIcon from '@material-ui/icons/ArrowDropDown';
+import BreadCrumb from '../../../components/BreadCrumb';
 
 const Workouts = (props) => {
+	const [dateAsc, setDateAsc] = React.useState(false);
+
 	React.useEffect(() => {
 		props.getWorkouts();
+		props.setTitle('Past Workouts');
 	}, []);
 
 	const getWorkoutName = (row) => {
@@ -28,16 +29,29 @@ const Workouts = (props) => {
 
 	return (
 		<>	
-			<Table size="small">
-				<TableBody>
-					{props.workouts.map(row => (
-						<TableRow key={row.id} onClick={() => props.goToWorkout(row.id)}>
-							<TableCell>{getDate(row)}</TableCell>
-							<TableCell>{getWorkoutName(row)}</TableCell>
-						</TableRow>
+			<BreadCrumb />
+			<table className="table table-hover">
+        <thead className="thead-light">
+          <tr>
+						<th onClick={() => setDateAsc(!dateAsc)}>Date {dateAsc ? <AscIcon /> : <DescIcon />}</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+				<tbody>
+					{props.workouts.sort((a, b) => {
+						if (dateAsc) {
+							return new Date(a.created_at) - new Date(b.created_at);
+						} else {
+							return new Date(b.created_at) - new Date(a.created_at);
+						}
+					}).map(row => (
+						<tr key={row.id} onClick={() => props.goToWorkout(row.id)}>
+							<td>{getDate(row)}</td>
+							<td>{getWorkoutName(row)}</td>
+						</tr>
 					))}
-				</TableBody>
-			</Table>
+				</tbody>
+			</table>
 		</>
 	);
 }

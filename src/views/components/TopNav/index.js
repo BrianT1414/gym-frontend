@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import TrendingUp from '@material-ui/icons/TrendingUp';
 import Build from '@material-ui/icons/Build';
+import Assignment from '@material-ui/icons/Assignment';
 import FitnessCenter from '@material-ui/icons/FitnessCenter';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -106,6 +107,13 @@ const SideNav = (props) => {
 			>
 				<ListItemIcon><TrendingUp /></ListItemIcon>
 				<ListItemText primary="History" />
+			</ListItem>
+			<ListItem 
+				button
+				onClick={props.changePage('/programs')}
+			>
+				<ListItemIcon><Assignment /></ListItemIcon>
+				<ListItemText primary="Programs" />
 			</ListItem>
 			<ListItem 
 				button

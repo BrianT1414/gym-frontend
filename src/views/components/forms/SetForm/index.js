@@ -9,12 +9,8 @@ const SetForm = (props) => {
 	const [values, setValues] = React.useState(props.initialValues);
 
 	React.useEffect(() => {
-		props.getMuscleGroups();
-		props.getMuscles();
-		props.getExercises();
-
 		return () => {
-			if (props.clearSuggestions === 'function') {
+			if (typeof props.clearSuggestions === 'function') {
 				props.clearSuggestions();
 			}
 		}
@@ -64,7 +60,9 @@ const SetForm = (props) => {
 			setValues(props.initialValues);
 			setMuscleGroup(props.initialGroup ? props.initialGroup : '');
 			setMuscle(props.initialMuscle ? props.initialMuscle : '');
-			props.clearSuggestions();
+			if (typeof props.clearSuggestions === 'function') {
+				props.clearSuggestions();
+			}
 		}
 	}
 
@@ -177,7 +175,7 @@ const SetForm = (props) => {
 					<button 
 						type="button" 
 						onClick={quickSetReps(5)} 
-						className={props.suggestions.reps == 5 ? "btn btn-primary" : "btn btn-secondary"}
+						className={props.suggestions && props.suggestions.reps == 5 ? "btn btn-primary" : "btn btn-secondary"}
 						style={{ marginRight: 2 }}
 					>
 						5
@@ -185,7 +183,7 @@ const SetForm = (props) => {
 					<button 
 						type="button" 
 						onClick={quickSetReps(10)} 
-						className={props.suggestions.reps == 10 ? "btn btn-primary" : "btn btn-secondary"}
+						className={props.suggestions && props.suggestions.reps == 10 ? "btn btn-primary" : "btn btn-secondary"}
 						style={{ marginRight: 2 }}
 					>
 						10
@@ -193,7 +191,7 @@ const SetForm = (props) => {
 					<button 
 						type="button" 
 						onClick={quickSetReps(12)} 
-						className={props.suggestions.reps == 12 ? "btn btn-primary" : "btn btn-secondary"}
+						className={props.suggestions && props.suggestions.reps == 12 ? "btn btn-primary" : "btn btn-secondary"}
 					>
 						12
 					</button>

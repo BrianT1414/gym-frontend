@@ -5,9 +5,10 @@ import Settings from '../containers/Settings';
 import Workout from '../containers/Workout';
 import Login from './Login';
 import History from '../containers/History';
+import Programs from '../containers/Programs';
 
 const Router = (props) => {
-  const [title, setTitle] = React.useState('Workout App');
+	const [title, setTitle] = React.useState('Workout App');
 
 	return (
 		<>
@@ -25,6 +26,9 @@ const Router = (props) => {
 					</Route>
 					<Route path="/history">
 						<History setTitle={setTitle} {...props} />
+					</Route>
+					<Route path="/programs">
+						<Programs setTitle={setTitle} {...props} />
 					</Route>
 					<Route path="/login">
 						<Login setTitle={setTitle} {...props} />

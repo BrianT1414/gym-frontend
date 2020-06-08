@@ -385,6 +385,12 @@ export function getWorkout(id) {
 	}
 }
 
+export function clearWorkout() {
+	return {
+		type: types.CLEAR_WORKOUT
+	}
+}
+
 export function checkCurrentWorkout() {
 	return {
 		types: [
@@ -418,5 +424,36 @@ export function getWorkouts() {
 export function clearSet() {
 	return {
 		type: types.CLEAR_SET,
+	}
+}
+
+export function getPrograms() {
+	return {
+		types: [
+			types.GET_PROGRAMS_REQUEST,
+			types.GET_PROGRAMS_SUCCESS,
+			types.GET_PROGRAMS_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				url: api + '/programs'
+			})
+		}
+	}
+}
+
+export function createProgram(data) {
+	return {
+		types: [
+			types.CREATE_PROGRAM_REQUEST,
+			types.CREATE_PROGRAM_SUCCESS,
+			types.CREATE_PROGRAM_FAILURE,
+		],
+		promise: () => {
+			return ajax({
+				method: 'post',
+				url: api + '/programs'
+			})
+		}
 	}
 }

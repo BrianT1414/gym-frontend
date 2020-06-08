@@ -39,6 +39,9 @@ const App = (props) => {
 
 	React.useEffect(() => {
 		props.checkUser();
+		props.getMuscleGroups();
+		props.getMuscles();
+		props.getExercises();
 	}, []);
 
 	React.useEffect(() => {

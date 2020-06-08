@@ -99,6 +99,8 @@ function workout(state = {}, action) {
 		case types.GET_WORKOUT_SUCCESS:
 		case types.GET_CURRENT_WORKOUT_SUCCESS:
 			return action.payload;
+		case types.CLEAR_WORKOUT:
+			return {};
 		default:
 			return state;
 	}
@@ -142,6 +144,15 @@ function suggestions(state = {reps: null, weight: null}, action) {
 	}
 }
 
+function programs(state = [], action) {
+	switch(action.type) {
+		case types.GET_PROGRAMS_SUCCESS:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
 export default {
 	muscle_groups,
 	exercises,
@@ -152,5 +163,6 @@ export default {
 	workout,
 	workouts,
 	confirmContinueWorkout,
-	suggestions
+	suggestions,
+	programs,
 }

@@ -7,6 +7,7 @@ import History from '../../pages/History';
 
 const mapStateToProps = (state) => {
 	return {
+    workout: state.workout,
     workouts: state.workouts
 	};
 }
@@ -14,7 +15,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
     getWorkouts: actions.getWorkouts,
-    getWorkout: actions.getWorkout
+    getWorkout: actions.getWorkout,
+    clearWorkout: actions.clearWorkout,
+		updateSet: actions.updateSet,
 	}, dispatch);
 }
 
@@ -22,9 +25,13 @@ const HistoryContainer = (props) => {
   return (
     <History
       setTitle={props.setTitle}
+      workout={props.workout}
       workouts={props.workouts}
       getWorkouts={props.getWorkouts}
       getWorkout={props.getWorkout}
+      clearWorkout={props.clearWorkout}
+      updateSet={props.updateSet}
+      {...props}
     />
   );
 }
