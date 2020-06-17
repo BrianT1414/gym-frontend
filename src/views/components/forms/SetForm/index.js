@@ -53,9 +53,23 @@ const SetForm = (props) => {
 		props.clearSuggestions();
 	}
 
+	const validate = (values) => {
+		if (!values.exercise_id) {
+			return false;
+		}
+		if (!values.reps) {
+			return false;
+		}
+		if (!values.weight && values.weight !== 0) {
+			return false;
+		}
+
+		return true;
+	}
+
 	const submit = (e) => {
 		e.preventDefault();
-		if (values.exercise_id && values.reps && values.weight) {
+		if (validate(values)) {
 			props.submit(values);
 			setValues(props.initialValues);
 			setMuscleGroup(props.initialGroup ? props.initialGroup : '');
@@ -209,7 +223,7 @@ const SetForm = (props) => {
 					onChange={handleChange}
 				/>
 				<div className="col-6">
-					{props.showSuggestLast && props.suggestions.weight ?
+					{props.showSuggestLast && props.suggestions.weight !== null ?
 						<button 
 							type="button" 
 							onClick={() => quickSetWeight(props.suggestions.weight)} 
