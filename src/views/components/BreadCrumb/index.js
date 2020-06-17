@@ -30,7 +30,9 @@ const BreadCrumb = (props) => {
 
   return (
     <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb" style={{ marginBottom: 10 }}>
-      {pieces.map((piece, i) => {
+      {pieces.filter((piece) => {
+        return isNaN(piece);
+      }).map((piece, i) => {
         if (pieces.length === i + 1) {
           return (
             <Typography key={i} color="textPrimary">{formatPiece(piece)}</Typography>
