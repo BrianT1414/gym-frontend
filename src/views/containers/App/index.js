@@ -2,38 +2,43 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
-import * as actions from '../../../redux/actions';
+import { authActions } from '../../../redux/auth';
+import { muscleGroupActions } from '../../../redux/muscle_groups';
+import { muscleActions } from '../../../redux/muscles';
+import { exerciseActions } from '../../../redux/exercises';
+import { setActions } from '../../../redux/sets';
 import { connectMeta } from 'redux-meta';
 import Router from '../../pages';
 
 const mapStateToProps = (state) => {
+	console.log(state)
 	return {
-		user: state.user,
+		user: state.auth,
 		muscle_groups: state.muscle_groups,
 		muscles: state.muscles,
 		exercises: state.exercises,
-		sets: state.sets,
-		set: state.set,
-		workout: state.workout,
-		workouts: state.workouts
+		sets: state.setsReducer.sets,
+		set: state.setsReducer.set,
+		workout: state.workoutsReducer.workout,
+		workouts: state.workoutsReducer.workouts
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getMuscleGroups: actions.getMuscleGroups,
-		getMuscles: actions.getMuscles,
-		getExercises: actions.getExercises,
-		getSets: actions.getSets,
-		getSet: actions.getSet,
-		login: actions.login,
-		logout: actions.logout,
-		checkUser: actions.checkUser,
+		getMuscleGroups: muscleGroupActions.getMuscleGroups,
+		getMuscles: muscleActions.getMuscles,
+		getExercises: exerciseActions.getExercises,
+		getSets: setActions.getSets,
+		getSet: setActions.getSet,
+		login: authActions.login,
+		logout: authActions.logout,
+		checkUser: authActions.checkUser,
 	}, dispatch);
 }
 
 const App = (props) => {
-	const checkUserMeta = props.getMeta(actions.checkUser)
+	const checkUserMeta = props.getMeta(authActions.checkUser)
 
 	let history = useHistory();
 

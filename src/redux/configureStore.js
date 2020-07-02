@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from './middleware/promise-middleware';
-import reducers from './reducers';
+import * as reducers from './reducers';
 import { reducer as metaReducer } from 'redux-meta';
 
 const condenseReducers = (reducers) => {
