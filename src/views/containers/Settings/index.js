@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../../redux/actions';
+import { muscleGroupActions } from '../../../redux/muscle_groups';
+import { muscleActions } from '../../../redux/muscles';
+import { exerciseActions } from '../../../redux/exercises';
 import { connectMeta } from 'redux-meta';
 import Settings from '../../pages/Settings';
 
@@ -15,18 +17,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getMuscleGroups: actions.getMuscleGroups,
-		createMuscleGroup: actions.createMuscleGroup,
-		updateMuscleGroup: actions.updateMuscleGroup,
-		deleteMuscleGroup: actions.deleteMuscleGroup,
-		getMuscles: actions.getMuscles,
-		createMuscle: actions.createMuscle,
-		updateMuscle: actions.updateMuscle,
-		deleteMuscle: actions.deleteMuscle,
-		getExercises: actions.getExercises,
-		createExercise: actions.createExercise,
-		updateExercise: actions.updateExercise,
-		deleteExercise: actions.deleteExercise,
+		getMuscleGroups: muscleGroupActions.getMuscleGroups,
+		createMuscleGroup: muscleGroupActions.createMuscleGroup,
+		updateMuscleGroup: muscleGroupActions.updateMuscleGroup,
+		deleteMuscleGroup: muscleGroupActions.deleteMuscleGroup,
+		getMuscles: muscleActions.getMuscles,
+		createMuscle: muscleActions.createMuscle,
+		updateMuscle: muscleActions.updateMuscle,
+		deleteMuscle: muscleActions.deleteMuscle,
+		getExercises: exerciseActions.getExercises,
+		createExercise: exerciseActions.createExercise,
+		updateExercise: exerciseActions.updateExercise,
+		deleteExercise: exerciseActions.deleteExercise,
 	}, dispatch);
 }
 

@@ -1,23 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../../redux/actions';
+import { workoutActions } from '../../../redux/workouts';
+import { setActions } from '../../../redux/sets';
 import { connectMeta } from 'redux-meta';
 import History from '../../pages/History';
 
 const mapStateToProps = (state) => {
 	return {
-    workout: state.workout,
-    workouts: state.workouts
+    workout: state.workoutsReducer.workout,
+    workouts: state.workoutsReducer.workouts
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-    getWorkouts: actions.getWorkouts,
-    getWorkout: actions.getWorkout,
-    clearWorkout: actions.clearWorkout,
-		updateSet: actions.updateSet,
+    getWorkouts: workoutActions.getWorkouts,
+    getWorkout: workoutActions.getWorkout,
+    clearWorkout: workoutActions.clearWorkout,
+		updateSet: setActions.updateSet,
 	}, dispatch);
 }
 
